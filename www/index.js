@@ -11,6 +11,5 @@ async function init() {
   const sumFunction = wasm.instance.exports.sum;
   const result = sumFunction(10, 50);
   console.log(result);
-  debugger;
 }
 init();
