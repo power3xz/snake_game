@@ -3,7 +3,7 @@ import init, { World } from "snake_game";
 init().then((wasm) => {
   const CELL_SIZE = 16;
   const WORLD_WIDTH = 8;
-  const SNAKE_SPAWN_IDX = 32;
+  const SNAKE_SPAWN_IDX = Date.now() % (WORLD_WIDTH * WORLD_WIDTH);
 
   const world = World.new(WORLD_WIDTH, SNAKE_SPAWN_IDX);
   const worldWidth = world.width();
@@ -42,12 +42,13 @@ init().then((wasm) => {
   }
 
   function update() {
+    const fps = 10;
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       world.update();
       paint();
       requestAnimationFrame(update);
-    }, 100);
+    }, 1000 / fps);
   }
   paint();
   update();
