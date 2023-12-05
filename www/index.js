@@ -1,7 +1,7 @@
 import init, { World } from "snake_game";
 
 init().then((wasm) => {
-  const CELL_SIZE = 10;
+  const CELL_SIZE = 16;
   const world = World.new();
   const worldWidth = world.width();
   const canvas = document.getElementById("snake-canvas");
@@ -32,4 +32,11 @@ init().then((wasm) => {
   }
   drawWorld();
   drawSnake();
+
+  setInterval(() => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawWorld();
+    drawSnake();
+    world.update();
+  }, 100);
 });

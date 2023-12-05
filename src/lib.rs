@@ -29,7 +29,7 @@ pub struct World {
 impl World {
     pub fn new() -> World {
         World {
-            width: 16,
+            width: 8,
             snake: Snake::new(10),
         }
     }
@@ -40,5 +40,10 @@ impl World {
 
     pub fn snake_head_idx(&self) -> usize {
         self.snake.body[0].0
+    }
+
+    pub fn update(&mut self) {
+        let snake_idx = self.snake_head_idx();
+        self.snake.body[0].0 = (snake_idx + 1) % (self.width * self.width);
     }
 }
