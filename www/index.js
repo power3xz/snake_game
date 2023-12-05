@@ -21,5 +21,6 @@ init().then((wasm) => {
     }
     ctx.stroke();
   }
+  console.log(world.snake_head());
   drawWorld();
 });
