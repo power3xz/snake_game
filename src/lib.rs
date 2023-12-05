@@ -13,7 +13,7 @@ pub struct World {
 #[wasm_bindgen]
 impl World {
     pub fn new() -> World {
-        World { width: 9 }
+        World { width: 16 }
     }
 
     pub fn width(&self) -> usize {
