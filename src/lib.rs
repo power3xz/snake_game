@@ -55,7 +55,7 @@ pub struct World {
     snake: Snake,
     next_cell: Option<SnakeCell>,
     reward_cell: usize,
-    state: Option<GameStatus>,
+    status: Option<GameStatus>,
 }
 
 #[wasm_bindgen]
@@ -72,7 +72,7 @@ impl World {
             reward_cell,
             snake,
             next_cell: None,
-            state: None,
+            status: None,
         }
     }
 
@@ -119,8 +119,12 @@ impl World {
         self.snake.body.as_ptr()
     }
 
+    pub fn start_game(&mut self) {
+        self.status = Some(GameStatus::Played);
+    }
+
     pub fn step(&mut self) {
-        match self.state {
+        match self.status {
             Some(GameStatus::Played) => {
                 let temp = self.snake.body.clone();
 
