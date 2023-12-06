@@ -74,33 +74,20 @@ impl World {
         self.snake.body.as_ptr()
     }
 
-    // cannot return a reference to JS because of borrowing rules
-    // pub fn snake_cells(&self) -> &Vec<SnakeCell> {
-    //     &self.snake.body
-    // }
+    pub fn step(&mut self) {
+        let next_cell = self.gen_next_snake_cell();
+        self.snake.body[0] = next_cell;
+    }
 
-    pub fn update(&mut self) {
+    fn gen_next_snake_cell(&self) -> SnakeCell {
         let snake_idx = self.snake_head_idx();
-        let (row, col) = self.index_to_cell(snake_idx);
-        let (row, col) = match self.snake.direction {
-            Direction::Right => (row, (col + 1) % self.width),
-            Direction::Left => (row, (col - 1) % self.width),
-            Direction::Up => (row - 1, col),
-            Direction::Down => (row + 1, col),
-        };
-        let next_idx = self.cell_to_index(row, col);
-        self.set_snake_head(next_idx);
-    }
+        let row = snake_idx / self.width;
 
-    fn set_snake_head(&mut self, idx: usize) {
-        self.snake.body[0].0 = idx;
-    }
-
-    fn index_to_cell(&self, idx: usize) -> (usize, usize) {
-        (idx / self.width, idx % self.width)
-    }
-
-    fn cell_to_index(&self, row: usize, col: usize) -> usize {
-        ((row * self.width) + col) % self.size
+        match self.snake.direction {
+            Direction::Right => SnakeCell(row * self.width + (snake_idx + 1) % self.width),
+            Direction::Left => SnakeCell(row * self.width + (snake_idx - 1) % self.width),
+            Direction::Up => SnakeCell((snake_idx - self.width) % self.size),
+            Direction::Down => SnakeCell((snake_idx + self.width) % self.size),
+        }
     }
 }
