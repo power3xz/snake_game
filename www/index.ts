@@ -47,6 +47,9 @@ init().then((wasm) => {
     ctx.fillStyle = "#990000";
     ctx.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     ctx.stroke();
+    if (idx === 1000) {
+      alert("You won!");
+    }
   }
 
   function drawWorld() {
