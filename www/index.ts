@@ -71,13 +71,8 @@ init().then((wasm) => {
   }
 
   function drawGameStatus() {
-    const status = world.game_status();
     gameStatus.textContent = world.game_status_text();
     gamePoints.textContent = world.points().toString();
-
-    if (status === GameStatus.Won || status === GameStatus.Lost) {
-      gameControlBtn.textContent = "Re-Play";
-    }
   }
 
   function drawSnake() {
@@ -108,6 +103,11 @@ init().then((wasm) => {
 
   function play() {
     console.log("playing!");
+    const status = world.game_status();
+    if (status === GameStatus.Won || status === GameStatus.Lost) {
+      gameControlBtn.textContent = "Re-Play";
+      return;
+    }
     const fps = 10;
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
