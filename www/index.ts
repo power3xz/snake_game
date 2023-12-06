@@ -11,6 +11,7 @@ init().then((wasm) => {
   const canvas = <HTMLCanvasElement>document.getElementById("snake-canvas");
   const gameStatus = document.getElementById("game-status");
   const gameControlBtn = document.getElementById("game-control-btn");
+  const gamePoints = document.getElementById("points");
   const ctx = canvas.getContext("2d");
   canvas.height = CELL_SIZE * worldWidth;
   canvas.width = CELL_SIZE * worldWidth;
@@ -71,6 +72,7 @@ init().then((wasm) => {
 
   function drawGameStatus() {
     gameStatus.textContent = world.game_status_text();
+    gamePoints.textContent = world.points().toString();
   }
 
   function drawSnake() {
