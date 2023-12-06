@@ -15,8 +15,13 @@ init().then((wasm) => {
   canvas.width = CELL_SIZE * worldWidth;
 
   gameControlBtn.addEventListener("click", () => {
-    world.start_game();
-    play();
+    const gameStatus = world.game_status();
+    if (gameStatus === undefined) {
+      world.start_game();
+      play();
+    } else {
+      location.reload();
+    }
   });
 
   document.addEventListener("keydown", (e) => {
