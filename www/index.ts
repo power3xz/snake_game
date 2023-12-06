@@ -9,14 +9,15 @@ init().then((wasm) => {
   const world = World.new(WORLD_WIDTH, SNAKE_SPAWN_IDX);
   const worldWidth = world.width();
   const canvas = <HTMLCanvasElement>document.getElementById("snake-canvas");
+  const gameStatus = document.getElementById("game-status");
   const gameControlBtn = document.getElementById("game-control-btn");
   const ctx = canvas.getContext("2d");
   canvas.height = CELL_SIZE * worldWidth;
   canvas.width = CELL_SIZE * worldWidth;
 
   gameControlBtn.addEventListener("click", () => {
-    const gameStatus = world.game_status();
-    if (gameStatus === undefined) {
+    const status = world.game_status();
+    if (status === undefined) {
       gameControlBtn.textContent = "Playing...";
       world.start_game();
       play();
@@ -68,6 +69,10 @@ init().then((wasm) => {
     ctx.stroke();
   }
 
+  function drawGameStatus() {
+    gameStatus.textContent = world.game_status_text();
+  }
+
   function drawSnake() {
     const snakeCells = new Uint32Array(
       wasm.memory.buffer,
@@ -88,6 +93,7 @@ init().then((wasm) => {
     drawWorld();
     drawReward();
     drawSnake();
+    drawGameStatus();
   }
 
   function play() {
