@@ -12,6 +12,19 @@ init().then((wasm) => {
   canvas.height = CELL_SIZE * worldWidth;
   canvas.width = CELL_SIZE * worldWidth;
 
+  document.addEventListener("keydown", (e) => {
+    switch (e.code) {
+      case "ArrowUp":
+        break;
+      case "ArrowRight":
+        break;
+      case "ArrowDown":
+        break;
+      case "ArrowLeft":
+        break;
+    }
+  });
+
   function drawWorld() {
     ctx.beginPath();
     for (let x = 0; x < worldWidth + 1; x++) {
