@@ -13,15 +13,6 @@ init().then((wasm) => {
   canvas.height = CELL_SIZE * worldWidth;
   canvas.width = CELL_SIZE * worldWidth;
 
-  const snakeCellPtr = world.snake_cells();
-  const snakeLen = world.snake_length();
-  const snakeCells = new Uint32Array(
-    wasm.memory.buffer,
-    snakeCellPtr,
-    snakeLen
-  );
-  console.log(snakeCells);
-
   document.addEventListener("keydown", (e) => {
     switch (e.code) {
       case "KeyW":
