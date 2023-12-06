@@ -57,9 +57,10 @@ init().then((wasm) => {
       world.snake_cells(),
       world.snake_length()
     );
-    snakeCells.forEach((cellIdx) => {
+    snakeCells.forEach((cellIdx, i) => {
       const col = cellIdx % worldWidth;
       const row = Math.floor(cellIdx / worldWidth);
+      ctx.fillStyle = i === 0 ? "#7878db" : "#333333";
       ctx.beginPath();
       ctx.fillRect(col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     });
