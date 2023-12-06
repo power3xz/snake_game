@@ -122,6 +122,11 @@ impl World {
         for i in 1..len {
             self.snake.body[i] = SnakeCell(temp[i - 1].0);
         }
+
+        if self.reward_cell == self.snake_head_idx() {
+            self.snake.body.push(SnakeCell(self.snake.body[len - 1].0));
+            self.reward_cell = rnd(self.size);
+        }
     }
 
     fn gen_next_snake_cell(&self, direction: &Direction) -> SnakeCell {
