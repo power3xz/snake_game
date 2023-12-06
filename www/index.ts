@@ -17,6 +17,7 @@ init().then((wasm) => {
   gameControlBtn.addEventListener("click", () => {
     const gameStatus = world.game_status();
     if (gameStatus === undefined) {
+      gameControlBtn.textContent = "Playing...";
       world.start_game();
       play();
     } else {
