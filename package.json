@@ -4,7 +4,9 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "build": "npm run build --prefix www",
+    "heroku-prebuild": "npm install --prefix www"
   },
   "keywords": [],
   "author": "",
